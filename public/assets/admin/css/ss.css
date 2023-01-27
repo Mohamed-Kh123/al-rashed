@@ -1,0 +1,17 @@
+.table td, .table th{
+    padding: 0.6rem !important;
+}
+ 
+.table thead th:not(th:first-child), .table td:not(td:first-child){
+    text-align: center;
+    border-left: 0.3px solid #d9d9d9;
+}
+
+.table tr.result-tr {
+    font-weight: 600;
+    border-bottom: 0.3px solid #d9d9d9;
+}
+
+.ui-menu{
+    z-index: 4000 !important;
+}
