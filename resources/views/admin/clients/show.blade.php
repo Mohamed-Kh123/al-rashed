@@ -33,11 +33,18 @@
                 <td>{{ $invoice->amount }}</td>
                 <td>{{ date('d-m-Y', strtotime($invoice->invoice_date)) }}</td>
                 <td>
-                    <a href="{{route('payments.bill', $invoice->id)}}" class="btn btn-sm btn-dark">عرض الفاتورة</a>
+                    <a href="{{route('payments.bill', $invoice->id)}}" class="btn btn-sm btn-primary">عرض الفاتورة</a>
                 </td>
                 <td>
                     <a href="{{route('invoices.edit', $invoice->id)}}" class="btn btn-sm btn-dark">تعديل الفاتورة</a>
                 </td>
+                <td>
+                <form action="{{route('invoices.delete', $invoice->id)}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-sm btn-danger">حدف الفاتورة</button>
+                </td>
+            </form>
             </tr>
             @endforeach
         </tbody>

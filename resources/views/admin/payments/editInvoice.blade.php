@@ -29,7 +29,7 @@
         <div class="form-group">
             <label for="">قيمة الدفعة</label>
             <input type="text" class="form-control @error('amount') is-invalid @enderror" name="amount"
-                value="{{ $invoice->client->deserved_amount }}">
+                value="{{ old('amount', $invoice->amount) }}">
             @error('amount')
                 <p class="invalid-feedback">{{ $message }}</p>
             @enderror

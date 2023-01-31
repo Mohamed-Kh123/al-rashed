@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->nullable()->constrained('clients')->nullOnDelete();
-            $table->unsignedMediumInteger('amount');
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->string('january')->nullable();
             $table->string('february')->nullable();
             $table->string('march')->nullable();

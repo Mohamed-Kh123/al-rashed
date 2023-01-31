@@ -31,7 +31,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::simplePaginate();
+        $clients = Client::select('name', 'phone_number', 'deserved_amount', 'id')->get();
         
         // $total = Invoice::sum('amount');
 

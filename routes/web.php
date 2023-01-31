@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth', AdminMiddleware::class]], function(){
     Route::delete('payments/{id}/delete',[PaymentsController::class, 'edit'])->name('payments.destroy');
     Route::get('/bill/{id}/edit', [PaymentsController::class, 'editInvoice'])->name('invoices.edit');
     Route::put('/bill/{id}/update', [PaymentsController::class, 'updateInvoice'])->name('invoices.update');
+    Route::delete('/bill/{id}/delete', [PaymentsController::class, 'deleteInvoice'])->name('invoices.delete');
     Route::get('/bill/{id}', [PaymentsController::class, 'payment'])->name('payments.bill');
     Route::get('/pdf/{id}', [PaymentsController::class, 'pdfConvert'])->name('pdf');
     

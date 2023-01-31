@@ -14,6 +14,28 @@ use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
 {
+
+    private function getAmount()
+    {
+        $data = collect([]);
+        $data = [
+            Invoice::select('amount')->whereMonth('invoice_date', 1)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 2)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 3)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 4)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 5)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 6)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 7)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 8)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 9)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 10)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 11)->sum('amount'),
+            Invoice::select('amount')->whereMonth('invoice_date', 12)->sum('amount'),
+        ];
+        // dd($data);
+
+        return $data;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,49 +43,16 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::with('client')->get();
-
-        $data = collect([]);
-
-        if(!$data->count()){
-            $jan_total = Invoice::whereMonth('invoice_date', 1)->sum('amount');
-            $feb_total = Invoice::whereMonth('invoice_date', 2)->sum('amount');
-            $mar_total = Invoice::whereMonth('invoice_date', 3)->sum('amount');
-            $apr_total = Invoice::whereMonth('invoice_date', 4)->sum('amount');
-            $may_total = Invoice::whereMonth('invoice_date', 5)->sum('amount');
-            $jun_total = Invoice::whereMonth('invoice_date', 6)->sum('amount');
-            $jul_total = Invoice::whereMonth('invoice_date', 7)->sum('amount');
-            $aug_total = Invoice::whereMonth('invoice_date', 8)->sum('amount');
-            $sep_total = Invoice::whereMonth('invoice_date', 9)->sum('amount');
-            $oct_total = Invoice::whereMonth('invoice_date', 10)->sum('amount');
-            $nov_total = Invoice::whereMonth('invoice_date', 11)->sum('amount');
-            $dec_total = Invoice::whereMonth('invoice_date', 12)->sum('amount');
-
-            $data->push($jan_total);
-            $data->push($feb_total);
-            $data->push($mar_total);
-            $data->push($apr_total);
-            $data->push($may_total);
-            $data->push($jun_total);
-            $data->push($jul_total);
-            $data->push($aug_total);
-            $data->push($sep_total);
-            $data->push($oct_total);
-            $data->push($nov_total);
-            $data->push($dec_total);
-
-            // dd($data);
-        }
+        $payments = Payment::with(['client' => function($q){
+            $q->select('id', 'name');
+        }])->get();
 
         
-
-        // dd($data);
-
+    
         
         return view('admin.payments.index', [
             'payments' => $payments,
-            'data' => $data,
-
+            'data' => $this->getAmount(),
         ]);
     }
 
@@ -243,6 +232,15 @@ class PaymentsController extends Controller
         
     }
 
+    public function deleteInvoice($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+
+        $invoice->delete();
+
+        return redirect()->back()->with('success', 'تم حدف الدفعة بنجاح');
+    }
+
     public function payment($id)
     {
         $invoice = Invoice::with('client')->findOrFail($id);
@@ -264,7 +262,6 @@ class PaymentsController extends Controller
             'default_font_size' => "20",
             'setAutoTopMargin' => 'stretch',
             'autoMarginPadding' => 5
-
         ]);
 
         return $pdf->download("Invoice-$invoice->id.pdf");

@@ -60,7 +60,6 @@
     </table>
 
 
-    {{ $clients->links() }}
     
 
 @endsection

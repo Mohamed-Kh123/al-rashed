@@ -39,7 +39,7 @@
         <tbody>
             @foreach ($payments as $payment)
             <tr>
-                <td>{{$payment->client->name}}</td>
+                <td>{{$payment->client->name ?? null}}</td>
                 <td>{{$payment->january}}</td>
                 <td>{{$payment->february}}</td>
                 <td>{{$payment->march}}</td>
