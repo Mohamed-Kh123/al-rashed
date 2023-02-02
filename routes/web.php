@@ -5,9 +5,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\AdminMiddleware;
-use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
-use Mpdf\Mpdf;
 
 /*
 |--------------------------------------------------------------------------

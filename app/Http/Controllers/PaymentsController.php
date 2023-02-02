@@ -96,48 +96,98 @@ class PaymentsController extends Controller
             'december' => 'nullable',
         ]);
 
+        $invoice = Invoice::create([
+            'client_id' => $request->client_id,
+            'invoice_date' => $request->date,
+            'amount' => $request->amount,
+        ]);
+        
         $payment = Payment::find($id);
-
         if($payment){
-            $payment->january = $request->january;
-            $payment->february = $request->february;
-            $payment->march = $request->march;
-            $payment->april = $request->april;
-            $payment->may = $request->may;
-            $payment->june = $request->june;
-            $payment->july = $request->july;
-            $payment->ougust = $request->ougust;
-            $payment->september = $request->september;
-            $payment->october = $request->october;
-            $payment->november = $request->november;
-            $payment->december = $request->december;
+            if(date('m', strtotime($invoice->invoice_date)) == 01){
+                $payment->january = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 02){
+                $payment->february = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 03){
+                $payment->march = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 04){
+                $payment->april = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 05){
+                $payment->may = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 06){
+                $payment->june = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 07){
+                $payment->july = $invoice->invoice_date;
+            }
+           
+            if(date('M', strtotime($invoice->invoice_date)) == "Aug"){
+                $payment->ougust = $invoice->invoice_date;
+            }
+            if(date('M', strtotime($invoice->invoice_date)) == "Sep"){
+                $payment->september = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 10){
+                $payment->october = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 11){
+                $payment->november = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 12){
+                $payment->december = $invoice->invoice_date;
+            }
         }
 
         if(!$payment){
             $payment = new Payment();
+            if(date('m', strtotime($invoice->invoice_date)) == 01){
+                $payment->january = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 02){
+                $payment->february = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 03){
+                $payment->march = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 04){
+                $payment->april = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 05){
+                $payment->may = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 06){
+                $payment->june = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 07){
+                $payment->july = $invoice->invoice_date;
+            }
+           
+            if(date('M', strtotime($invoice->invoice_date)) == "Aug"){
+                $payment->ougust = $invoice->invoice_date;
+            }
+            if(date('M', strtotime($invoice->invoice_date)) == "Sep"){
+                $payment->september = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 10){
+                $payment->october = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 11){
+                $payment->november = $invoice->invoice_date;
+            }
+            if(date('m', strtotime($invoice->invoice_date)) == 12){
+                $payment->december = $invoice->invoice_date;
+            }
             $payment->client_id = $request->client_id;
-            $payment->january = $request->january;
-            $payment->february = $request->february;
-            $payment->march = $request->march;
-            $payment->april = $request->april;
-            $payment->may = $request->may;
-            $payment->june = $request->june;
-            $payment->july = $request->july;
-            $payment->ougust = $request->ougust;
-            $payment->september = $request->september;
-            $payment->october = $request->october;
-            $payment->november = $request->november;
-            $payment->december = $request->december;
         }
 
         $payment->save();
 
 
-        $invoice = Invoice::create([
-            'client_id' => $request->client_id,
-            'invoice_date' => now(),
-            'amount' => $request->amount,
-        ]);
         
         
 
@@ -235,6 +285,59 @@ class PaymentsController extends Controller
     public function deleteInvoice($id)
     {
         $invoice = Invoice::findOrFail($id);
+
+        $payment = Payment::where('client_id', $invoice->client_id)->first();
+
+        if(date('m', strtotime($invoice->invoice_date)) == 01){
+            $payment->january = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 02){
+            $payment->february = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 03){
+            $payment->march = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 04){
+            $payment->april = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 05){
+            $payment->may = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 06){
+            $payment->june = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 07){
+            $payment->july = null;
+            $payment->save();
+        }
+       
+        if(date('M', strtotime($invoice->invoice_date)) == "Aug"){
+            $payment->ougust = null;
+            $payment->save();
+        }
+        if(date('M', strtotime($invoice->invoice_date)) == "Sep"){
+            $payment->september = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 10){
+            $payment->october = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 11){
+            $payment->november = null;
+            $payment->save();
+        }
+        if(date('m', strtotime($invoice->invoice_date)) == 12){
+            $payment->december = null;
+            $payment->save();
+        }
+        
 
         $invoice->delete();
 
