@@ -61,9 +61,10 @@
         <footer class="receipt-footer">
             <span class="fw-bolder">059-828-8836</span>
         </footer>
-        
-        <a href="{{route('pdf', $invoice->id)}}" class="btn btn-sm btn-primary">طباعة</a>
     </div>
+    
+    <a href="{{route('pdf', $invoice->id)}}" class="btn btn-sm btn-primary">طباعة</a>
+    <a href="{{route('payments.index', $invoice->id)}}" class="btn btn-sm btn-primary">صفحة الدفعات</a>
     {{-- <script src="{{asset('assets/payments/js/all.min.js')}}"></script>
     <script src="{{asset('assets/payments/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/payments/js/bootstrap.bundle.min.js.map')}}"></script> --}}

@@ -39,7 +39,7 @@
         <tbody>
             @foreach ($payments as $payment)
             <tr>
-                <td>{{$payment->client->name ?? null}}</td>
+                <td><a href="{{route('clients.show', $payment->client_id)}}">{{$payment->client->name ?? null}}</a></td>
                 <td>{{$payment->january}}</td>
                 <td>{{$payment->february}}</td>
                 <td>{{$payment->march}}</td>
