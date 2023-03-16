@@ -5,6 +5,10 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Client;
+use App\Models\Invoice;
+use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +30,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::group(['middleware' => ['auth', AdminMiddleware::class]], function(){
     Route::resource('/clients', ClientController::class);
+    Route::get('/client/without-payment/{month}', [ClientController::class, 'getClientsWithoutPayments'])->name('client.without-payment');
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('payments/{id}/create', [PaymentsController::class, 'create'])->name('payments.create');
     Route::post('payments/store/{id?}', [PaymentsController::class, 'store'])->name('payments.store');
@@ -44,5 +48,18 @@ Route::group(['middleware' => ['auth', AdminMiddleware::class]], function(){
     Route::get('/getNames', [SearchController::class, 'getNames']);
 
 
+    Route::get('/test', function(){
+    
+        $invoices = Invoice::whereMonth('invoice_date', 2)->get('client_id');
+        if($invoices){
+            $clients = DB::table('clients')->leftJoin('invoices', function($join){
+                $join->on('clients.id', '=', 'invoices.client_id')
+                ->whereMonth('invoice_date', 3);
+            })
+            ->whereNull('invoices.id')
+            ->toSql();
+            return $clients;
+        }
+        
 
-});
+    });

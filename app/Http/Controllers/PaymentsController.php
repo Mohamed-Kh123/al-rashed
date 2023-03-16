@@ -81,6 +81,7 @@ class PaymentsController extends Controller
     
         $request->validate([
             'client_id' => 'required|exists:clients,id',
+            'date' => 'required|date',
             'amount' => 'required|max:255',
             'january' => 'nullable',
             'february' => 'nullable',

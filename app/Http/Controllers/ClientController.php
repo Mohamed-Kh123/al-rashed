@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Invoice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -120,5 +121,18 @@ class ClientController extends Controller
         Client::destroy($id);
 
         return redirect()->back()->with('success', 'تم حدف المشترك بنجاح');
+    }
+
+
+    public function getClientsWithoutPayments($month)
+    {
+        $clients = DB::table('clients')->leftJoin('invoices', function($join) use($month){
+            $join->on('clients.id', '=', 'invoices.client_id')
+            ->whereMonth('invoice_date', $month);
+        })
+        ->whereNull('invoices.id')
+        ->get();
+        
+        return view('admin.clients.withoutpayment', compact('clients'));
     }
 }

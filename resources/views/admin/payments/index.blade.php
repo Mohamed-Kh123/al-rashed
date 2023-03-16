@@ -21,18 +21,18 @@
         <thead>
             <tr>
                 <th>اسم المشترك</th>
-                <th>يناير</th>
-                <th>فبراير</th>
-                <th>مارس</th>
-                <th>ابريل</th>
-                <th>مايو</th>
-                <th>يونيو</th>
-                <th>يوليو</th>
-                <th>اغسطس</th>
-                <th>سبتمبر</th>
-                <th>اكتوبر</th>
-                <th>نوفمبر</th>
-                <th>ديسمبر</th>
+                <th><a href="{{route('client.without-payment', 1)}}">يناير</a></th>
+                <th><a href="{{route('client.without-payment', 2)}}">فبراير</a></th>
+                <th><a href="{{route('client.without-payment', 3)}}">مارس</a></th>
+                <th><a href="{{route('client.without-payment', 4)}}">ابريل</a></th>
+                <th><a href="{{route('client.without-payment', 5)}}">مايو</a></th>
+                <th><a href="{{route('client.without-payment', 6)}}">يونيو</a></th>
+                <th><a href="{{route('client.without-payment', 7)}}">يوليو</a></th>
+                <th><a href="{{route('client.without-payment', 8)}}">اغسطس</a></th>
+                <th><a href="{{route('client.without-payment', 9)}}">سبتمبر</a></th>
+                <th><a href="{{route('client.without-payment', 10)}}">اكتوبر</a></th>
+                <th><a href="{{route('client.without-payment', 11)}}">نوفمبر</a></th>
+                <th><a href="{{route('client.without-payment', 12)}}">ديسمبر</a></th>
                 <th></th>
             </tr>
         </thead>
